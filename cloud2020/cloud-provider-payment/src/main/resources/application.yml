@@ -1,0 +1,33 @@
+server:
+  port: 8001
+
+spring:
+  application:
+    name: cloud-provider-service
+  zipkin:
+    base-url: http://localhost:9411
+  sleuth:
+        #采样介于0--1之间   1 为 全部采样
+    sampler:
+      probability: 1
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource      #当前数据源操作类型
+    driver-class-name: org.gjt.mm.mysql.Driver        #mysql驱动包
+    url: jdbc:mysql://localhost:3306/yangbo?useUnicode=true&characterEncoding-utr-8&useSSL=false
+    username: root
+    password: yangbo
+
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+  type-aliases-package: com.atguigui.springcloud.entities       #所有Entity别名类所在包
+
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      #defaultZone: http://eureka7001.com:7001/eureka,http://eureka7002.com:7002/
+      defaultZone: http://eureka7001.com:7001/eureka
+  instance:
+    instance-id: payment8001
+    prefer-ip-address: true
